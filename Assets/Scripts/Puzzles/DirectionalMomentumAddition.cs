@@ -9,6 +9,7 @@ public class DirectionalMomentumAddition : MonoBehaviour
     [SerializeField] Vector2 direction;
     [SerializeField] float strength;
     [SerializeField] bool active;
+    public bool isWind;
     Animator animator;
 
     // Start is called before the first frame update
@@ -23,11 +24,12 @@ public class DirectionalMomentumAddition : MonoBehaviour
         {
             VFX.enabled = active;
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+
+        if (isWind && active)
+        {
+            MusicManager.instance.Play("Wind");
+        }
     }
 
     public void toggleActive()
@@ -40,6 +42,10 @@ public class DirectionalMomentumAddition : MonoBehaviour
         if (VFX != null)
         {
             VFX.enabled = active;
+        }
+        if (isWind && active)
+        {
+            MusicManager.instance.Play("Wind");
         }
     }
 
@@ -54,6 +60,10 @@ public class DirectionalMomentumAddition : MonoBehaviour
         {
             VFX.enabled = active;
         }
+        if (isWind)
+        {
+            MusicManager.instance.Stop("Wind");
+        }
     }
 
     public void On()
@@ -66,6 +76,10 @@ public class DirectionalMomentumAddition : MonoBehaviour
         if (VFX != null)
         {
             VFX.enabled = active;
+        }
+        if (isWind)
+        {
+            MusicManager.instance.Play("Wind");
         }
     }
 

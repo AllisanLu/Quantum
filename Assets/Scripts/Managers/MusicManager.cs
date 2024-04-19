@@ -30,6 +30,12 @@ public class MusicManager : MonoBehaviour {
         }
 
         instance = this;
+
+        soundfx = new Dictionary<string, AudioSource>();
+        foreach (AudioSource audioSource in sfxlist)
+        {
+            soundfx[audioSource.name] = audioSource;
+        }
     }
 
     // Start is called before the first frame update
@@ -51,13 +57,6 @@ public class MusicManager : MonoBehaviour {
 
             instance.Pause();
         }
-
-        soundfx = new Dictionary<string, AudioSource>();
-        foreach (AudioSource audioSource in sfxlist)
-        {
-            soundfx[audioSource.name] = audioSource;
-        }
-
     } // Start
 
     // Update is called once per frame
@@ -136,6 +135,12 @@ public class MusicManager : MonoBehaviour {
         AudioSource audio = soundfx[sfx];
         audio.volume = sfxVolume;
         audio.Play();
+    }
+
+    public void Stop(string sfx)
+    {
+        AudioSource audio = soundfx[sfx];
+        audio.Stop();
     }
 
 } // MusicManager
