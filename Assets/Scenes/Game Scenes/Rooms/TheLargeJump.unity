@@ -277,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3622792529283053304, guid: b7dceb57a59b0a843ba0928109e3ca6c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1822533280
+      value: 3013580586
       objectReference: {fileID: 0}
     - target: {fileID: 3641129102115278543, guid: b7dceb57a59b0a843ba0928109e3ca6c, type: 3}
       propertyPath: m_Name
@@ -2459,6 +2459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 580099934
+  InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2670,7 +2671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5586239694988307996, guid: cd05cec826b0df14d8c34f90066cfff4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5953528494720459928, guid: cd05cec826b0df14d8c34f90066cfff4, type: 3}
       propertyPath: m_Pivot.x

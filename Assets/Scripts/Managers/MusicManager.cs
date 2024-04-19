@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour {
@@ -8,12 +10,16 @@ public class MusicManager : MonoBehaviour {
     public static MusicManager instance { get; private set; }
 
     private AudioSource edoTrackSource, cyberTrackSource, mainMenuSource;
+
+    public List<AudioSource> sfxlist;
     public bool mainMenu = false;
     public bool cyberActive = false;
     public float masterVolume;
     public float sfxVolume;
     private float edoVolume, cyberVolume, mmVolume;
     public float crossfadeSpeed = 0.8f;
+
+    private Dictionary<string, AudioSource> soundfx;
 
     private void Awake()
     {
@@ -44,6 +50,12 @@ public class MusicManager : MonoBehaviour {
             instance.mmVolume = 1;
 
             instance.Pause();
+        }
+
+        soundfx = new Dictionary<string, AudioSource>();
+        foreach (AudioSource audioSource in sfxlist)
+        {
+            soundfx[audioSource.name] = audioSource;
         }
 
     } // Start
@@ -117,6 +129,13 @@ public class MusicManager : MonoBehaviour {
         }
 
         instance.UnPause();
+    }
+
+    public void Play(string sfx)
+    {
+        AudioSource audio = soundfx[sfx];
+        audio.volume = sfxVolume;
+        audio.Play();
     }
 
 } // MusicManager

@@ -252,6 +252,7 @@ public class PlayerMovement : MonoBehaviour
         side = anim.sr.flipX ? -1 : 1;
 
         jumpParticle.Play();
+        MusicManager.instance.Play("Walk");
     }
 
     // Player Actions
@@ -346,6 +347,7 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(GroundDash());
 
         dashParticle.Play();
+        MusicManager.instance.Play("Dash");
         rb.gravityScale = 0;
         GetComponent<PlayerJump>().enabled = false;
         wallJumped = true;
@@ -370,8 +372,6 @@ public class PlayerMovement : MonoBehaviour
    
      private void WallJump()
      {
-
-
         if ((side == 1 && coll.onRightWall) || side == -1 && !coll.onRightWall)
         {
             side *= -1;
@@ -388,7 +388,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         wallJumped = true;
-
     }  
         
    
@@ -432,6 +431,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
         }
+
+/*        if (coll.onGround && dir.x != 0)
+        {
+            MusicManager.instance.Play("Walk");
+        }*/
     }
 
     private void Jump(Vector2 dir, bool wall)
@@ -443,6 +447,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity += dir * jumpForce;
 
         particle.Play();
+        MusicManager.instance.Play("Jump");
     }
 
     IEnumerator DisableMovement(float time)
