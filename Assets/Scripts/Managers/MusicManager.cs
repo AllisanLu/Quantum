@@ -132,8 +132,9 @@ public class MusicManager : MonoBehaviour {
 
     public void Play(string sfx)
     {
+        print("Play " + sfx);
         AudioSource audio = soundfx[sfx];
-        audio.volume = sfxVolume;
+        audio.volume = 1;
         audio.Play();
     }
 

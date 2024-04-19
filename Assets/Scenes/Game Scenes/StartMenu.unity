@@ -1147,10 +1147,6 @@ PrefabInstance:
       propertyPath: mainMenu
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3905956770190817405, guid: b5328c0e51fe8f848af2db13ac1e047e, type: 3}
-      propertyPath: masterVolume
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6020282440061634743, guid: b5328c0e51fe8f848af2db13ac1e047e, type: 3}
       propertyPath: m_Name
       value: MusicManager

@@ -66,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float currentSlide;
 
+    private bool playingWallSlide;
+
     #region technical
     private bool isMovingInputed;
     #endregion
@@ -101,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
         qlockRecieved = false;
         lastDash = Time.time - dashCD;
         lastMomentumParticle = Time.time;
+        playingWallSlide = false;
     }
 
     public void DisableLegacyInput()
@@ -472,10 +475,22 @@ public class PlayerMovement : MonoBehaviour
         {
             slideParticle.transform.parent.localScale = new Vector3(ParticleSide(), 1, 1);
             main.startColor = slideColor;
+
+            if (!playingWallSlide)
+            {
+                MusicManager.instance.Play("Wallslide");
+                playingWallSlide = true;
+            }
         }
         else
         {
             main.startColor = Color.clear;
+
+            if (playingWallSlide)
+            {
+                MusicManager.instance.Stop("Wallslide");
+                playingWallSlide = false;
+            }
         }
     }
 
