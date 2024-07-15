@@ -5,8 +5,15 @@ using UnityEngine;
 public class Yarn : MonoBehaviour
 {
     public int id = 0;
-    [SerializeField] bool following;
+    bool following;
+    bool dying;
     GameObject player;
+    Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void FixedUpdate()
     {
@@ -20,6 +27,11 @@ public class Yarn : MonoBehaviour
                 speed = 0.2f;
             }
 
+            if (dying)
+            {
+                speed = 0;
+            }
+
             Vector2 direction = (player.transform.position - this.transform.position);
 
             if (direction.magnitude > threshold)
@@ -30,17 +42,27 @@ public class Yarn : MonoBehaviour
         }
     }
 
+    public void DestroyYarn()
+    {
+        Destroy(this.gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         string tag = collision.gameObject.tag;
         PlayerCollision pc = collision.gameObject.GetComponent<PlayerCollision>();
+        PlayerSettings ps = collision.gameObject.GetComponent<PlayerSettings>();
 
-        if (tag == "Player" && pc && pc.onGround)
+        if (tag == "Player" && pc.onGround && !ps.dead)
         {
+            animator.SetTrigger("get");
             GameManager.instance.collectYarn(id);
-            Destroy(this.gameObject);
         }
-
+        else if (ps.dead)
+        {
+            animator.SetTrigger("die");
+            dying = true;
+        }
         else if (tag == "Player")
         {
             following = true;
@@ -52,11 +74,17 @@ public class Yarn : MonoBehaviour
     {
         string tag = collision.gameObject.tag;
         PlayerCollision pc = collision.gameObject.GetComponent<PlayerCollision>();
+        PlayerSettings ps = collision.gameObject.GetComponent<PlayerSettings>();
 
-        if (tag == "Player" && pc && pc.onGround)
+        if (tag == "Player" && pc.onGround && !ps.dead)
         {
+            animator.SetTrigger("get");
             GameManager.instance.collectYarn(id);
-            Destroy(this.gameObject);
+        }
+        else if (ps.dead)
+        {
+            animator.SetTrigger("die");
+            dying = true;
         }
     }
 }

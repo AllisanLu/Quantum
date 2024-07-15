@@ -9,6 +9,7 @@ public class TextScroller : MonoBehaviour
     TextMeshProUGUI textmeshpro;
     string fullText;
     public Image space;
+    public float waitTime = 0.06f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class TextScroller : MonoBehaviour
         foreach (char c in fullText.ToCharArray())
         {
             textmeshpro.text += c;
-            yield return new WaitForSeconds(0.06f);
+            yield return new WaitForSeconds(waitTime);
         }
 
         space.color = Color.white;
