@@ -75,10 +75,6 @@ public class GameManager : MonoBehaviour
         {
             Screen.SetResolution(640, 480, false);
         }
-        else
-        {
-            Screen.SetResolution(1280, 480, false);
-        }
     }
 
     public void SetSceneLoad()
