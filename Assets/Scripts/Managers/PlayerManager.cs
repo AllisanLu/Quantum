@@ -126,22 +126,30 @@ public class PlayerManager : NetworkBehaviour
                 {
                     player1 = p;
 
-                    if (playerControllers[0] != null)
+                    if (playerControllers[0] != null && PlayerManager.instance.playerOnLeft != 2)
                     {
                         playerControllers[0].PlayerReference = p;
+
+                    } else if (playerControllers.Length > 1 && playerControllers[1] != null && PlayerManager.instance.playerOnLeft == 2)
+                    {
+                        playerControllers[1].PlayerReference = p;
                     }
                 }
                 else
                 {
                     player2 = p;
 
-                    if (playerControllers[1] != null)
+                    if (playerControllers[0] != null && PlayerManager.instance.playerOnLeft == 2)
+                    {
+                        playerControllers[0].PlayerReference = p;
+
+                    }
+                    else if (playerControllers.Length > 1 && playerControllers[1] != null && PlayerManager.instance.playerOnLeft != 2)
                     {
                         playerControllers[1].PlayerReference = p;
                     }
 
                 }
-                //Debug.Log("Play Reference Changed!!");
             }
         }
         MakeShadows();
